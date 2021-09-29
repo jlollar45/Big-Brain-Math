@@ -15,6 +15,7 @@
 		4CA48839270413EA00257175 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA48838270413EA00257175 /* PlayView.swift */; };
 		4CA4883B270413F500257175 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4883A270413F500257175 /* StatsView.swift */; };
 		4CA4883D2704160800257175 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4883C2704160800257175 /* Color+Ext.swift */; };
+		4CA4883F270529E800257175 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4883E270529E800257175 /* BackgroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		4CA48838270413EA00257175 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		4CA4883A270413F500257175 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		4CA4883C2704160800257175 /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
+		4CA4883E270529E800257175 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				4CA48838270413EA00257175 /* PlayView.swift */,
 				4CA4883A270413F500257175 /* StatsView.swift */,
 				4CA4883C2704160800257175 /* Color+Ext.swift */,
+				4CA4883E270529E800257175 /* BackgroundView.swift */,
 			);
 			path = "Big Brain Math";
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 				4CA48837270413D400257175 /* AccountView.swift in Sources */,
 				4CA4883B270413F500257175 /* StatsView.swift in Sources */,
 				4CA4881926FAB3CD00257175 /* MathTabView.swift in Sources */,
+				4CA4883F270529E800257175 /* BackgroundView.swift in Sources */,
 				4CA48839270413EA00257175 /* PlayView.swift in Sources */,
 				4CA4881726FAB3CD00257175 /* Big_Brain_MathApp.swift in Sources */,
 				4CA4883D2704160800257175 /* Color+Ext.swift in Sources */,

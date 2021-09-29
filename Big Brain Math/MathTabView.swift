@@ -28,7 +28,7 @@ struct MathTabView: View {
                     Text("Profile")
                 }
         }
-        .accentColor(.brandPrimary)
+        .accentColor(.brandSecondary)
     }
 }
 
