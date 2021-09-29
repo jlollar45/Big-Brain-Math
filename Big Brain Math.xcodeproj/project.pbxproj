@@ -8,18 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		4CA4881726FAB3CD00257175 /* Big_Brain_MathApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4881626FAB3CD00257175 /* Big_Brain_MathApp.swift */; };
-		4CA4881926FAB3CD00257175 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4881826FAB3CD00257175 /* ContentView.swift */; };
+		4CA4881926FAB3CD00257175 /* MathTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4881826FAB3CD00257175 /* MathTabView.swift */; };
 		4CA4881B26FAB3D000257175 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CA4881A26FAB3D000257175 /* Assets.xcassets */; };
 		4CA4881E26FAB3D000257175 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CA4881D26FAB3D000257175 /* Preview Assets.xcassets */; };
+		4CA48837270413D400257175 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA48836270413D400257175 /* AccountView.swift */; };
+		4CA48839270413EA00257175 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA48838270413EA00257175 /* PlayView.swift */; };
+		4CA4883B270413F500257175 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4883A270413F500257175 /* StatsView.swift */; };
+		4CA4883D2704160800257175 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4883C2704160800257175 /* Color+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4CA4881326FAB3CD00257175 /* Big Brain Math.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Big Brain Math.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA4881626FAB3CD00257175 /* Big_Brain_MathApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Big_Brain_MathApp.swift; sourceTree = "<group>"; };
-		4CA4881826FAB3CD00257175 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4CA4881826FAB3CD00257175 /* MathTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTabView.swift; sourceTree = "<group>"; };
 		4CA4881A26FAB3D000257175 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CA4881D26FAB3D000257175 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4CA4881F26FAB3D000257175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CA48836270413D400257175 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		4CA48838270413EA00257175 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
+		4CA4883A270413F500257175 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		4CA4883C2704160800257175 /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,10 +61,14 @@
 			isa = PBXGroup;
 			children = (
 				4CA4881626FAB3CD00257175 /* Big_Brain_MathApp.swift */,
-				4CA4881826FAB3CD00257175 /* ContentView.swift */,
+				4CA4881826FAB3CD00257175 /* MathTabView.swift */,
 				4CA4881A26FAB3D000257175 /* Assets.xcassets */,
 				4CA4881F26FAB3D000257175 /* Info.plist */,
 				4CA4881C26FAB3D000257175 /* Preview Content */,
+				4CA48836270413D400257175 /* AccountView.swift */,
+				4CA48838270413EA00257175 /* PlayView.swift */,
+				4CA4883A270413F500257175 /* StatsView.swift */,
+				4CA4883C2704160800257175 /* Color+Ext.swift */,
 			);
 			path = "Big Brain Math";
 			sourceTree = "<group>";
@@ -138,8 +150,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CA4881926FAB3CD00257175 /* ContentView.swift in Sources */,
+				4CA48837270413D400257175 /* AccountView.swift in Sources */,
+				4CA4883B270413F500257175 /* StatsView.swift in Sources */,
+				4CA4881926FAB3CD00257175 /* MathTabView.swift in Sources */,
+				4CA48839270413EA00257175 /* PlayView.swift in Sources */,
 				4CA4881726FAB3CD00257175 /* Big_Brain_MathApp.swift in Sources */,
+				4CA4883D2704160800257175 /* Color+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,9 +283,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"Big Brain Math/Preview Content\"";
-				DEVELOPMENT_TEAM = UTWXQAE394;
+				DEVELOPMENT_TEAM = Y58Z2JJ8PD;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Big Brain Math/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -277,8 +294,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.parkingpal.Big-Brain-Math";
+				PRODUCT_BUNDLE_IDENTIFIER = com.parkingpal.mathgame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Math Game Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -289,9 +307,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"Big Brain Math/Preview Content\"";
-				DEVELOPMENT_TEAM = UTWXQAE394;
+				DEVELOPMENT_TEAM = Y58Z2JJ8PD;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Big Brain Math/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -299,8 +318,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.parkingpal.Big-Brain-Math";
+				PRODUCT_BUNDLE_IDENTIFIER = com.parkingpal.mathgame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Math Game Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

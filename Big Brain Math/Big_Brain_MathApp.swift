@@ -11,7 +11,7 @@ import SwiftUI
 struct Big_Brain_MathApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MathTabView()
         }
     }
 }
