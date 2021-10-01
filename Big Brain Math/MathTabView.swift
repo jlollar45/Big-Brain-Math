@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct MathTabView: View {
+    
+    init() {
+        UITabBar.appearance().backgroundColor = .tabBarPrimary
+    }
+    
     var body: some View {
         TabView {
             PlayView()
@@ -29,6 +34,12 @@ struct MathTabView: View {
                 }
         }
         .accentColor(.brandSecondary)
+        .onAppear() {
+            if #available(iOS 15.0, *) {
+                let appearance = UITabBarAppearance()
+                UITabBar.appearance().scrollEdgeAppearance = appearance
+            }
+        }
     }
 }
 

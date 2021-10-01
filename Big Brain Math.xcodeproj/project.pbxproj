@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C7138972706AB650085A309 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7138962706AB630085A309 /* GameView.swift */; };
 		4CA4881726FAB3CD00257175 /* Big_Brain_MathApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4881626FAB3CD00257175 /* Big_Brain_MathApp.swift */; };
 		4CA4881926FAB3CD00257175 /* MathTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA4881826FAB3CD00257175 /* MathTabView.swift */; };
 		4CA4881B26FAB3D000257175 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CA4881A26FAB3D000257175 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C7138962706AB630085A309 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		4CA4881326FAB3CD00257175 /* Big Brain Math.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Big Brain Math.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA4881626FAB3CD00257175 /* Big_Brain_MathApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Big_Brain_MathApp.swift; sourceTree = "<group>"; };
 		4CA4881826FAB3CD00257175 /* MathTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTabView.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				4CA4883A270413F500257175 /* StatsView.swift */,
 				4CA4883C2704160800257175 /* Color+Ext.swift */,
 				4CA4883E270529E800257175 /* BackgroundView.swift */,
+				4C7138962706AB630085A309 /* GameView.swift */,
 			);
 			path = "Big Brain Math";
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 				4CA4883F270529E800257175 /* BackgroundView.swift in Sources */,
 				4CA48839270413EA00257175 /* PlayView.swift in Sources */,
 				4CA4881726FAB3CD00257175 /* Big_Brain_MathApp.swift in Sources */,
+				4C7138972706AB650085A309 /* GameView.swift in Sources */,
 				4CA4883D2704160800257175 /* Color+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,7 +297,7 @@
 				DEVELOPMENT_TEAM = Y58Z2JJ8PD;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Big Brain Math/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -317,7 +321,7 @@
 				DEVELOPMENT_TEAM = Y58Z2JJ8PD;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Big Brain Math/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
