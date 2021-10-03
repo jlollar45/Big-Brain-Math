@@ -9,9 +9,13 @@ import SwiftUI
 
 struct AccountView: View {
     var body: some View {
-        ZStack {
-            BackgroundView()
+        NavigationView {
+            ZStack {
+                BackgroundView()
+            }
+            .navigationTitle("Profile")
         }
+        
     }
 }
 

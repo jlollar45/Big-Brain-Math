@@ -10,6 +10,7 @@ import SwiftUI
 struct PlayView: View {
     
     @State private var isShowingGameView = false
+    @EnvironmentObject var mathProblem: MathProblem
     
     var body: some View {
         NavigationView {
@@ -43,6 +44,7 @@ struct playButton: View {
     
     var imageName: String
     @Binding var isShowingGameView: Bool
+    @EnvironmentObject var mathProblem: MathProblem
     
     var body: some View {
         ZStack {
@@ -61,7 +63,8 @@ struct playButton: View {
         )
         .onTapGesture {
             self.isShowingGameView = true
-        }.fullScreenCover(isPresented: $isShowingGameView, content: GameView.init)
+            //mathProblem.generateRandomProblem()
+        }.fullScreenCover(isPresented: $isShowingGameView, content: GameView.init).environmentObject(MathProblem())
         .padding()
     }
 }

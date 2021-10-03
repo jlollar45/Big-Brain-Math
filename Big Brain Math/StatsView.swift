@@ -9,8 +9,11 @@ import SwiftUI
 
 struct StatsView: View {
     var body: some View {
-        ZStack {
-            BackgroundView()
+        NavigationView {
+            ZStack {
+                BackgroundView()
+            }
+            .navigationTitle("Progress")
         }
     }
 }
