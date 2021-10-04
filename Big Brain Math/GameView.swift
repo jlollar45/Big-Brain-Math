@@ -57,6 +57,9 @@ struct GameView: View {
                 }
             }
         }
+        .onAppear() {
+            mathProblem.generateRandomProblem()
+        }
     }
 }
 
@@ -73,7 +76,7 @@ struct AnswerButton: View {
     
     var body: some View {
         Button {
-            mathProblem.generateRandomProblem()
+            mathProblem.checkAnswer(buttonLabel: buttonLabel)
         } label: {
             Text("\(buttonLabel)")
                 .frame(width: 320, height: 60)
@@ -87,17 +90,16 @@ struct AnswerButton: View {
 
 final class MathProblem: ObservableObject {
     
-    //@Published var answersArray = [0, 0, 0, 0]
-    
     @Published var numberOne: Int = 0
     @Published var numberTwo: Int = 0
     @Published var answersArray = [0, 0, 0, 0]
+    @Published var answer = 0
     
     func generateRandomProblem() {
         numberOne = generateNumber()
         numberTwo = generateNumber()
         
-        let answer = numberOne + numberTwo
+        answer = numberOne + numberTwo
         answersArray = generateAnswersArray(answer: answer)
     }
     
@@ -130,5 +132,14 @@ final class MathProblem: ObservableObject {
     
     func checkAnswer(buttonLabel: String) {
         
+        let selectedAnswer = Int(buttonLabel)
+        
+        if selectedAnswer == answer {
+            print("Correct!")
+        } else {
+            print("WRONG :-(")
+        }
+        
+        generateRandomProblem()
     }
 }

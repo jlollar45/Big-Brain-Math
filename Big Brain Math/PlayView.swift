@@ -29,7 +29,6 @@ struct PlayView: View {
                 }
                 .navigationTitle("Play Games")
             }
-            
         }
     }
 }
@@ -63,8 +62,8 @@ struct playButton: View {
         )
         .onTapGesture {
             self.isShowingGameView = true
-            //mathProblem.generateRandomProblem()
-        }.fullScreenCover(isPresented: $isShowingGameView, content: GameView.init).environmentObject(MathProblem())
+        }.fullScreenCover(isPresented: $isShowingGameView,
+                          content: GameView.init).environmentObject(MathProblem())
         .padding()
     }
 }
