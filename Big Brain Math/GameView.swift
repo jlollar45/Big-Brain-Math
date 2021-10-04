@@ -50,10 +50,10 @@ struct GameView: View {
                 }
                 
                 VStack {
-                    AnswerButton(buttonLabel: "\(mathProblem.answer)")
-                    AnswerButton(buttonLabel: "\(mathProblem.wrongAnswers[0])")
-                    AnswerButton(buttonLabel: "\(mathProblem.wrongAnswers[1])")
-                    AnswerButton(buttonLabel: "\(mathProblem.wrongAnswers[2])")
+                    AnswerButton(buttonLabel: "\(mathProblem.answersArray[0])")
+                    AnswerButton(buttonLabel: "\(mathProblem.answersArray[1])")
+                    AnswerButton(buttonLabel: "\(mathProblem.answersArray[2])")
+                    AnswerButton(buttonLabel: "\(mathProblem.answersArray[3])")
                 }
             }
         }
@@ -69,7 +69,6 @@ struct GameView_Previews: PreviewProvider {
 struct AnswerButton: View {
     
     @EnvironmentObject var mathProblem: MathProblem
-    
     var buttonLabel: String
     
     var body: some View {
@@ -88,17 +87,18 @@ struct AnswerButton: View {
 
 final class MathProblem: ObservableObject {
     
+    //@Published var answersArray = [0, 0, 0, 0]
+    
     @Published var numberOne: Int = 0
     @Published var numberTwo: Int = 0
-    @Published var answer: Int = 0
-    @Published var wrongAnswers: [Int] = [0, 0, 0]
+    @Published var answersArray = [0, 0, 0, 0]
     
     func generateRandomProblem() {
         numberOne = generateNumber()
         numberTwo = generateNumber()
-        answer = numberOne + numberTwo
         
-        wrongAnswers = generateWrongAnswers()
+        let answer = numberOne + numberTwo
+        answersArray = generateAnswersArray(answer: answer)
     }
     
     func generateNumber() -> Int {
@@ -106,15 +106,29 @@ final class MathProblem: ObservableObject {
         return randomInt
     }
     
-    func generateWrongAnswers() -> [Int] {
+    func generateRandomLocation() -> Int {
+        let randomLocation = Int.random(in: 0...3)
+        return randomLocation
+    }
+    
+    func generateAnswersArray(answer: Int) -> [Int] {
         
+        let answerLocation = generateRandomLocation()
         var randomAnswers: [Int] = []
         
-        for _ in 1...3 {
-            let randomInt = Int.random(in: 10..<30)
-            randomAnswers.append(randomInt)
+        for index in 0...3 {
+            if answerLocation == index {
+                randomAnswers.append(answer)
+            } else {
+                let randomInt = Int.random(in: (answer - 10)..<(answer + 10))
+                randomAnswers.append(randomInt)
+            }
         }
         
         return randomAnswers
+    }
+    
+    func checkAnswer(buttonLabel: String) {
+        
     }
 }
