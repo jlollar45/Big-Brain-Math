@@ -10,7 +10,9 @@ import SwiftUI
 struct GameView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var mathProblem: MathProblem
+    @StateObject var mathProblem = MathProblem()
+    @State var selectedId = -1
+    @State var isCorrect = false
     
     var body: some View {
         
@@ -50,16 +52,17 @@ struct GameView: View {
                 }
                 
                 VStack {
-                    AnswerButton(buttonLabel: "\(mathProblem.answersArray[0])")
-                    AnswerButton(buttonLabel: "\(mathProblem.answersArray[1])")
-                    AnswerButton(buttonLabel: "\(mathProblem.answersArray[2])")
-                    AnswerButton(buttonLabel: "\(mathProblem.answersArray[3])")
+                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[0])", id: 0, isCorrect: $isCorrect)
+                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[1])", id: 1, isCorrect: $isCorrect)
+                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[2])", id: 2, isCorrect: $isCorrect)
+                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[3])", id: 3, isCorrect: $isCorrect)
                 }
             }
         }
         .onAppear() {
             mathProblem.generateRandomProblem()
         }
+        .environmentObject(mathProblem)
     }
 }
 
@@ -72,15 +75,21 @@ struct GameView_Previews: PreviewProvider {
 struct AnswerButton: View {
     
     @EnvironmentObject var mathProblem: MathProblem
+    @Binding var selectedId: Int
     var buttonLabel: String
+    var id: Int
+    @Binding var isCorrect: Bool
     
     var body: some View {
         Button {
-            mathProblem.checkAnswer(buttonLabel: buttonLabel)
+            selectedId = self.id
+            isCorrect = mathProblem.checkAnswer(answerButton: self)
         } label: {
             Text("\(buttonLabel)")
                 .frame(width: 320, height: 60)
-                .background(Color.flipBrandPrimary)
+                .background(
+                    selectedId == id ? (isCorrect == true ? .green : .red ) : Color.flipBrandPrimary
+                )
                 .foregroundColor(Color.brandPrimary)
                 .cornerRadius(20.0)
                 .font(.largeTitle)
@@ -94,6 +103,8 @@ final class MathProblem: ObservableObject {
     @Published var numberTwo: Int = 0
     @Published var answersArray = [0, 0, 0, 0]
     @Published var answer = 0
+    @Published var answerLocation = -1
+    @Published var selectedId = -1
     
     func generateRandomProblem() {
         numberOne = generateNumber()
@@ -115,7 +126,7 @@ final class MathProblem: ObservableObject {
     
     func generateAnswersArray(answer: Int) -> [Int] {
         
-        let answerLocation = generateRandomLocation()
+        answerLocation = generateRandomLocation()
         var randomAnswers: [Int] = []
         
         for index in 0...3 {
@@ -130,16 +141,21 @@ final class MathProblem: ObservableObject {
         return randomAnswers
     }
     
-    func checkAnswer(buttonLabel: String) {
-        
-        let selectedAnswer = Int(buttonLabel)
-        
+    func checkAnswer(answerButton: AnswerButton) -> Bool {
+
+        let selectedAnswer = Int(answerButton.buttonLabel)
+        selectedId = answerButton.id
+        var isCorrect = false
+
         if selectedAnswer == answer {
-            print("Correct!")
-        } else {
-            print("WRONG :-(")
+            isCorrect = true
         }
         
-        generateRandomProblem()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            answerButton.selectedId = -1
+            self.generateRandomProblem()
+        }
+        
+        return isCorrect
     }
 }
