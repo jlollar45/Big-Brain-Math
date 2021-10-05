@@ -13,6 +13,7 @@ struct GameView: View {
     @StateObject var mathProblem = MathProblem()
     @State var selectedId = -1
     @State var isCorrect = false
+    @State var score = 0.0
     
     var body: some View {
         
@@ -21,11 +22,20 @@ struct GameView: View {
             
             VStack {
                 HStack {
-                    Text("Score")
-                    Button("X") {
+                    Spacer()
+                    Button("Quit") {
                         presentationMode.wrappedValue.dismiss()
                     }
+                    .foregroundColor(Color.primary)
+                    .padding(.trailing, 50)
                 }
+                
+                ProgressView(value: score, total: 20)
+                    .progressViewStyle(.linear)
+                    .frame(width: 320, height: 80)
+                    .scaleEffect(x: 1, y: 4, anchor: .center)
+                    .tint(Color.brandSecondary)
+                
                 
                 Spacer()
                 
@@ -52,10 +62,10 @@ struct GameView: View {
                 }
                 
                 VStack {
-                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[0])", id: 0, isCorrect: $isCorrect)
-                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[1])", id: 1, isCorrect: $isCorrect)
-                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[2])", id: 2, isCorrect: $isCorrect)
-                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[3])", id: 3, isCorrect: $isCorrect)
+                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[0])", id: 0, isCorrect: $isCorrect, score: $score)
+                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[1])", id: 1, isCorrect: $isCorrect, score: $score)
+                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[2])", id: 2, isCorrect: $isCorrect, score: $score)
+                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[3])", id: 3, isCorrect: $isCorrect, score: $score)
                 }
             }
         }
@@ -79,11 +89,21 @@ struct AnswerButton: View {
     var buttonLabel: String
     var id: Int
     @Binding var isCorrect: Bool
+    @Binding var score: Double
     
     var body: some View {
         Button {
             selectedId = self.id
             isCorrect = mathProblem.checkAnswer(answerButton: self)
+            if isCorrect {
+                if score < 20 {
+                    score += 1
+                }
+            } else {
+                if score > 0 {
+                    score -= 1
+                }
+            }
         } label: {
             Text("\(buttonLabel)")
                 .frame(width: 320, height: 60)
