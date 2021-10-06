@@ -153,7 +153,13 @@ final class MathProblem: ObservableObject {
             if answerLocation == index {
                 randomAnswers.append(answer)
             } else {
-                let randomInt = Int.random(in: (answer - 10)..<(answer + 10))
+                var randomInt = -1
+                
+                repeat {
+                    randomInt = Int.random(in: (answer - 10)..<(answer + 10))
+                } while randomInt == answer
+
+                //let randomInt = Int.random(in: (answer - 10)..<(answer + 10))
                 randomAnswers.append(randomInt)
             }
         }
