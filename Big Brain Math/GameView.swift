@@ -154,12 +154,19 @@ final class MathProblem: ObservableObject {
                 randomAnswers.append(answer)
             } else {
                 var randomInt = -1
+                var repeatedAnswer = false
                 
                 repeat {
                     randomInt = Int.random(in: (answer - 10)..<(answer + 10))
-                } while randomInt == answer
+                    repeatedAnswer = false
+                    
+                    for i in 0..<randomAnswers.count {
+                        if randomInt == randomAnswers[i] || randomInt == self.answer {
+                            repeatedAnswer = true
+                        }
+                    }
+                } while repeatedAnswer == true
 
-                //let randomInt = Int.random(in: (answer - 10)..<(answer + 10))
                 randomAnswers.append(randomInt)
             }
         }
