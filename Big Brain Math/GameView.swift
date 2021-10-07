@@ -14,6 +14,8 @@ struct GameView: View {
     @State var selectedId = -1
     @State var isCorrect = false
     @State var score = 0.0
+    @State var timeRemaining = 30.0
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         
@@ -30,11 +32,16 @@ struct GameView: View {
                     .padding(.trailing, 50)
                 }
                 
-                ProgressView(value: score, total: 20)
+                ProgressView(value: timeRemaining, total: 30)
                     .progressViewStyle(.linear)
                     .frame(width: 320, height: 80)
                     .scaleEffect(x: 1, y: 4, anchor: .center)
-                    .tint(Color.brandSecondary)
+                    .tint(Color.red)
+                    .onReceive((timer)) { _ in
+                        if timeRemaining > 0 {
+                            timeRemaining -= 1
+                        }
+                    }
                 
                 
                 Spacer()
@@ -60,6 +67,12 @@ struct GameView: View {
                             .padding(.trailing, 50)
                     }
                 }
+                
+                ProgressView(value: score, total: 20)
+                    .progressViewStyle(.linear)
+                    .frame(width: 320, height: 80)
+                    .scaleEffect(x: 1, y: 4, anchor: .center)
+                    .tint(Color.brandSecondary)
                 
                 VStack {
                     AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[0])", id: 0, isCorrect: $isCorrect, score: $score)
