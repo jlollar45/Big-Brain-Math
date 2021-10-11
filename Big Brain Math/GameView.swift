@@ -22,63 +22,65 @@ struct GameView: View {
         ZStack {
             BackgroundView()
             
-            VStack {
-                HStack {
-                    Spacer()
-                    Button("Quit") {
-                        presentationMode.wrappedValue.dismiss()
+            GeometryReader { metrics in
+                VStack (spacing: 0) {
+                    HStack {
+                        Spacer()
+                        Button("Quit") {
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                        .foregroundColor(Color.primary)
+                        .padding(.trailing, 50)
                     }
-                    .foregroundColor(Color.primary)
-                    .padding(.trailing, 50)
-                }
-                
-                ProgressView(value: timeRemaining, total: 30)
-                    .progressViewStyle(.linear)
-                    .frame(width: 320, height: 80)
-                    .scaleEffect(x: 1, y: 4, anchor: .center)
-                    .tint(Color.red)
-                    .onReceive((timer)) { _ in
-                        if timeRemaining > 0 {
-                            timeRemaining -= 1
+                    .frame(height: metrics.size.height * 0.08)
+                    
+                    ProgressView(value: timeRemaining, total: 30)
+                        .progressViewStyle(.linear)
+                        .frame(width: 320, height: metrics.size.height * 0.1)
+                        .scaleEffect(x: 1, y: 4, anchor: .center)
+                        .tint(Color.red)
+                        .onReceive((timer)) { _ in
+                            if timeRemaining > 0 {
+                                timeRemaining -= 1
+                            }
+                        }
+                    
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Text("\(mathProblem.numberOne)")
+                                .font(.system(size: 140, weight: .semibold))
+                                .foregroundColor(.flipBrandPrimary)
+                                .padding(.trailing, 50)
+                        }
+                        
+                        HStack {
+                            Spacer()
+                            Text("+")
+                                .font(.system(size: 140, weight: .semibold))
+                                .foregroundColor(.flipBrandPrimary)
+                            Spacer()
+                            Text("\(mathProblem.numberTwo)")
+                                .font(.system(size: 140, weight: .semibold))
+                                .foregroundColor(.flipBrandPrimary)
+                                .padding(.trailing, 50)
                         }
                     }
-                
-                
-                Spacer()
-                
-                VStack {
-                    HStack {
-                        Spacer()
-                        Text("\(mathProblem.numberOne)")
-                            .font(.system(size: 140, weight: .semibold))
-                            .foregroundColor(.flipBrandPrimary)
-                            .padding(.trailing, 50)
-                    }
+                    .frame(height: metrics.size.height * 0.36)
                     
-                    HStack {
-                        Spacer()
-                        Text("+")
-                            .font(.system(size: 140, weight: .semibold))
-                            .foregroundColor(.flipBrandPrimary)
-                        Spacer()
-                        Text("\(mathProblem.numberTwo)")
-                            .font(.system(size: 140, weight: .semibold))
-                            .foregroundColor(.flipBrandPrimary)
-                            .padding(.trailing, 50)
+                    ProgressView(value: score, total: 20)
+                        .progressViewStyle(.linear)
+                        .frame(width: 320, height: metrics.size.height * 0.1)
+                        .scaleEffect(x: 1, y: 4, anchor: .center)
+                        .tint(Color.brandSecondary)
+                    
+                    VStack (spacing: 10) {
+                        AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[0])", id: 0, isCorrect: $isCorrect, score: $score)
+                        AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[1])", id: 1, isCorrect: $isCorrect, score: $score)
+                        AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[2])", id: 2, isCorrect: $isCorrect, score: $score)
+                        AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[3])", id: 3, isCorrect: $isCorrect, score: $score)
                     }
-                }
-                
-                ProgressView(value: score, total: 20)
-                    .progressViewStyle(.linear)
-                    .frame(width: 320, height: 80)
-                    .scaleEffect(x: 1, y: 4, anchor: .center)
-                    .tint(Color.brandSecondary)
-                
-                VStack {
-                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[0])", id: 0, isCorrect: $isCorrect, score: $score)
-                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[1])", id: 1, isCorrect: $isCorrect, score: $score)
-                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[2])", id: 2, isCorrect: $isCorrect, score: $score)
-                    AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[3])", id: 3, isCorrect: $isCorrect, score: $score)
+                    .frame(height: metrics.size.height * 0.36)
                 }
             }
         }
@@ -119,7 +121,7 @@ struct AnswerButton: View {
             }
         } label: {
             Text("\(buttonLabel)")
-                .frame(width: 320, height: 60)
+                .frame(maxWidth: 320, maxHeight: .infinity)
                 .background(
                     selectedId == id ? (isCorrect == true ? .green : .red ) : Color.flipBrandPrimary
                 )
