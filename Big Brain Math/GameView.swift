@@ -10,7 +10,7 @@ import SwiftUI
 struct GameView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var mathProblem = MathProblem()
+    @EnvironmentObject var mathProblem: MathProblem
     @State var selectedId = -1
     @State var isCorrect = false
     @State var score = 0.0
@@ -48,22 +48,14 @@ struct GameView: View {
                     VStack {
                         HStack {
                             Spacer()
-                            Text("\(mathProblem.numberOne)")
-                                .font(.system(size: 140, weight: .semibold))
-                                .foregroundColor(.flipBrandPrimary)
-                                .padding(.trailing, 50)
+                            QuestionNumbers(number: mathProblem.numberOne)
                         }
                         
                         HStack {
                             Spacer()
-                            Text("+")
-                                .font(.system(size: 140, weight: .semibold))
-                                .foregroundColor(.flipBrandPrimary)
+                            QuestionOperator(operation: mathProblem.operation)
                             Spacer()
-                            Text("\(mathProblem.numberTwo)")
-                                .font(.system(size: 140, weight: .semibold))
-                                .foregroundColor(.flipBrandPrimary)
-                                .padding(.trailing, 50)
+                            QuestionNumbers(number: mathProblem.numberTwo)
                         }
                     }
                     .frame(height: metrics.size.height * 0.36)
@@ -93,6 +85,33 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView()
+    }
+}
+
+struct QuestionNumbers: View {
+    
+    @EnvironmentObject var mathProblem: MathProblem
+    var number: Int
+    
+    var body: some View {
+        Text("\(number)")
+            .font(.system(size: 140, weight: .semibold))
+            .foregroundColor(.flipBrandPrimary)
+            .padding(.trailing, 50)
+            .minimumScaleFactor(0.01)
+    }
+}
+
+struct QuestionOperator: View {
+    
+    @EnvironmentObject var mathProblem: MathProblem
+    var operation: String
+    
+    var body: some View {
+        Text("\(operation)")
+            .font(.system(size: 140, weight: .semibold))
+            .foregroundColor(.flipBrandPrimary)
+            .minimumScaleFactor(0.01)
     }
 }
 
@@ -139,12 +158,25 @@ final class MathProblem: ObservableObject {
     @Published var answer = 0
     @Published var answerLocation = -1
     @Published var selectedId = -1
+    @Published var operation = ""
     
     func generateRandomProblem() {
         numberOne = generateNumber()
         numberTwo = generateNumber()
         
-        answer = numberOne + numberTwo
+        switch operation {
+        case "+":
+            answer = numberOne + numberTwo
+        case "-":
+            answer = numberOne - numberTwo
+        case "x":
+            answer = numberOne * numberTwo
+        case "÷":
+            answer = numberOne / numberTwo
+        default:
+            print("Something went wrong with the operation.")
+        }
+        
         answersArray = generateAnswersArray(answer: answer)
     }
     

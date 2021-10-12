@@ -61,9 +61,25 @@ struct playButton: View {
             }
         )
         .onTapGesture {
+            setOperation()
             self.isShowingGameView = true
         }.fullScreenCover(isPresented: $isShowingGameView,
-                          content: GameView.init).environmentObject(MathProblem())
+                          content: GameView.init)
         .padding()
+    }
+    
+    func setOperation() {
+        switch imageName {
+        case "plus":
+            mathProblem.operation = "+"
+        case "minus":
+            mathProblem.operation = "-"
+        case "multiply":
+            mathProblem.operation = "x"
+        case "divide":
+            mathProblem.operation = "÷"
+        default:
+            print("No image selected")
+        }
     }
 }

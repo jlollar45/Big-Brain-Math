@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Big_Brain_MathApp: App {
+    
+    var mathProblem = MathProblem()
+    
     var body: some Scene {
         WindowGroup {
-            MathTabView()
+            MathTabView().environmentObject(mathProblem)
         }
     }
 }
