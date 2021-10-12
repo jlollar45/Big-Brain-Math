@@ -23,7 +23,7 @@ struct GameView: View {
             BackgroundView()
             
             GeometryReader { metrics in
-                VStack (spacing: 0) {
+                VStack (spacing: 5) {
                     HStack {
                         Spacer()
                         Button("Quit") {
@@ -32,11 +32,11 @@ struct GameView: View {
                         .foregroundColor(Color.primary)
                         .padding(.trailing, 50)
                     }
-                    .frame(height: metrics.size.height * 0.08)
+                    .frame(height: metrics.size.height * 0.06)
                     
                     ProgressView(value: timeRemaining, total: 30)
                         .progressViewStyle(.linear)
-                        .frame(width: 320, height: metrics.size.height * 0.1)
+                        .frame(width: 320, height: metrics.size.height * 0.09)
                         .scaleEffect(x: 1, y: 4, anchor: .center)
                         .tint(Color.red)
                         .onReceive((timer)) { _ in
@@ -70,15 +70,14 @@ struct GameView: View {
                     
                     ProgressView(value: score, total: 20)
                         .progressViewStyle(.linear)
-                        .frame(width: 320, height: metrics.size.height * 0.1)
+                        .frame(width: 320, height: metrics.size.height * 0.09)
                         .scaleEffect(x: 1, y: 4, anchor: .center)
                         .tint(Color.brandSecondary)
                     
                     VStack (spacing: 10) {
-                        AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[0])", id: 0, isCorrect: $isCorrect, score: $score)
-                        AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[1])", id: 1, isCorrect: $isCorrect, score: $score)
-                        AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[2])", id: 2, isCorrect: $isCorrect, score: $score)
-                        AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[3])", id: 3, isCorrect: $isCorrect, score: $score)
+                        ForEach(0 ..< 4) { number in
+                            AnswerButton(selectedId: $selectedId, buttonLabel: "\(mathProblem.answersArray[number])", id: number, isCorrect: $isCorrect, score: $score)
+                        }
                     }
                     .frame(height: metrics.size.height * 0.36)
                 }
