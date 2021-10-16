@@ -192,32 +192,21 @@ final class MathProblem: ObservableObject {
     
     func generateAnswersArray(answer: Int) -> [Int] {
         
-        answerLocation = generateRandomLocation()
-        var randomAnswers: [Int] = []
+        var answers: [Int] = []
+        answers.append(answer);
         
-        for index in 0...3 {
-            if answerLocation == index {
-                randomAnswers.append(answer)
-            } else {
-                var randomInt = -1
-                var repeatedAnswer = false
-                
-                repeat {
-                    randomInt = Int.random(in: (answer - 10)..<(answer + 10))
-                    repeatedAnswer = false
-                    
-                    for i in 0..<randomAnswers.count {
-                        if randomInt == randomAnswers[i] || randomInt == self.answer {
-                            repeatedAnswer = true
-                        }
-                    }
-                } while repeatedAnswer == true
-
-                randomAnswers.append(randomInt)
-            }
+        for _ in 0...2 {
+            var randomInt = -1
+            repeat {
+                randomInt = Int.random(in: (answer - 10)..<(answer + 10))
+            } while answers.contains(randomInt)
+            
+            answers.append(randomInt)
         }
         
-        return randomAnswers
+        answers.shuffle()
+        answerLocation = answers.firstIndex(of: answer)!
+        return answers
     }
     
     func checkAnswer(answerButton: AnswerButton) -> Bool {
