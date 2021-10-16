@@ -18,13 +18,13 @@ struct PlayView: View {
                 BackgroundView()
                 VStack {
                     HStack {
-                        playButton(imageName: "plus", isShowingGameView: $isShowingGameView)
-                        playButton(imageName: "minus", isShowingGameView: $isShowingGameView)
+                        buttonStack(imageName: "plus", level: 1, isShowingGameView: $isShowingGameView)
+                        buttonStack(imageName: "minus", level: 1, isShowingGameView: $isShowingGameView)
                     }
                     
                     HStack {
-                        playButton(imageName: "multiply", isShowingGameView: $isShowingGameView)
-                        playButton(imageName: "divide", isShowingGameView: $isShowingGameView)
+                        buttonStack(imageName: "multiply", level: 1, isShowingGameView: $isShowingGameView)
+                        buttonStack(imageName: "divide", level: 1, isShowingGameView: $isShowingGameView)
                     }
                 }
                 .navigationTitle("Play Games")
@@ -36,6 +36,30 @@ struct PlayView: View {
 struct PlayView_Previews: PreviewProvider {
     static var previews: some View {
         PlayView()
+    }
+}
+
+struct buttonStack: View {
+    
+    var imageName: String
+    var level: Int
+    @Binding var isShowingGameView: Bool
+    
+    var body: some View {
+        VStack {
+            playButton(imageName: imageName, isShowingGameView: $isShowingGameView)
+            VStack (spacing: 0) {
+                Text("Next Level:")
+                    .font(.footnote)
+                    .italic()
+                Text("Level \(level)")
+                    .font(.title3)
+                    .fontWeight(.bold)
+            }
+            .padding()
+            .overlay(RoundedRectangle(cornerRadius: 25)
+                        .stroke(Color.flipBrandPrimary, lineWidth: 2))
+        }
     }
 }
 
