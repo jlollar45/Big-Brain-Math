@@ -126,13 +126,18 @@ struct AnswerButton: View {
     
     var body: some View {
         Button {
+            let haptic = UINotificationFeedbackGenerator()
+            
             selectedId = self.id
             isCorrect = mathProblem.checkAnswer(answerButton: self)
+            
             if isCorrect {
+                haptic.notificationOccurred(.success)
                 if score < 20 {
                     score += 1
                 }
             } else {
+                haptic.notificationOccurred(.error)
                 if score > 0 {
                     score -= 1
                 }
