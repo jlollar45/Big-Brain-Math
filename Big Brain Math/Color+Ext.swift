@@ -12,6 +12,7 @@ extension Color {
     static let brandSecondary   = Color("brandSecondary")
     static let tabBarPrimary    = Color("tabBarPrimary")
     static let flipBrandPrimary = Color("flipBrandPrimary")
+    static let invert           = Color("invert")
 }
 
 extension UIColor {
@@ -19,4 +20,5 @@ extension UIColor {
     static let brandSecondary   = UIColor(named: "brandSecondary")
     static let tabBarPrimary    = UIColor(named: "tabBarPrimary")
     static let flipBrandPrimary = UIColor(named: "flipBrandPrimary")
+    static let invert           = UIColor(named: "invert")
 }

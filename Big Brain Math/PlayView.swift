@@ -52,14 +52,33 @@ struct buttonStack: View {
                 Text("Next Level:")
                     .font(.footnote)
                     .italic()
+                    .foregroundColor(Color.flipBrandPrimary)
                 Text("Level \(level)")
                     .font(.title3)
                     .fontWeight(.bold)
+                    .foregroundColor(Color.flipBrandPrimary)
             }
             .padding()
+//            .background(Color.flipBrandPrimary)
+//            .cornerRadius(25)
+//            .shadow(color: .black, radius: 2, x: -2, y: -2)
+//            .shadow(color: .black, radius: 2, x: 2, y: 2)
             .overlay(RoundedRectangle(cornerRadius: 25)
                         .stroke(Color.flipBrandPrimary, lineWidth: 2))
+            .shadow(color: Color.invert, radius: 2, x: 2, y: 2)
         }
+    }
+}
+
+struct PlayButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(width: 160, height: 160)
+            .background(Color.flipBrandPrimary)
+            .clipShape(Circle())
+            .shadow(color: Color.invert, radius: 3, x: 3, y: 3)
+            .scaleEffect(configuration.isPressed ? 0.8 : 1)
+            .animation(.easeIn(duration: 0.2), value: configuration.isPressed)
     }
 }
 
@@ -67,29 +86,48 @@ struct playButton: View {
     
     var imageName: String
     @Binding var isShowingGameView: Bool
+    @State var isTapped: Bool = false
     @EnvironmentObject var mathProblem: MathProblem
     
     var body: some View {
-        ZStack {
-            Image(systemName: "\(imageName)")
-                .font(.system(size: 80, weight: .bold))
-        }
-        .frame(width: 160, height: 160)
-        .background(
-            ZStack {
-                Circle()
-                    .fill(Color("brandPrimary"))
-                    .frame(width: 160, height: 160)
-                    .shadow(color: .white, radius: 2, x: -2, y: -2)
-                    .shadow(color: .black, radius: 2, x: 2, y: 2)
-            }
-        )
-        .onTapGesture {
+        
+        Button(action: {
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
             setOperation()
             self.isShowingGameView = true
-        }.fullScreenCover(isPresented: $isShowingGameView,
-                          content: GameView.init)
+        }) {
+            Image(systemName: "\(imageName)")
+                .font(.system(size: 80, weight: .bold))
+                .foregroundColor(Color.brandPrimary)
+        }
+        .buttonStyle(PlayButtonStyle())
         .padding()
+        .fullScreenCover(isPresented: $isShowingGameView, content: GameView.init)
+        
+        
+//        ZStack {
+//            Image(systemName: "\(imageName)")
+//                .font(.system(size: 80, weight: .bold))
+//                .foregroundColor(Color.brandPrimary)
+//        }
+//        .frame(width: 160, height: 160)
+//        .background(
+//            ZStack {
+//                Circle()
+//                    .fill(Color("flipBrandPrimary"))
+//                    .frame(width: 160, height: 160)
+//                    .shadow(color: Color.invert, radius: 3, x: 3, y: 3)
+//                    .scaleEffect(self.isTapped ? 0.8 : 1)
+//            }
+//        )
+//        .onTapGesture {
+//            setOperation()
+//            self.isTapped.toggle()
+//            self.isShowingGameView = true
+//        }.fullScreenCover(isPresented: $isShowingGameView,
+//                          content: GameView.init)
+//
+//        .padding()
     }
     
     func setOperation() {
